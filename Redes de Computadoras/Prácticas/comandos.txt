@@ -1,0 +1,44 @@
+enable
+Config t
+int fa0/0
+ip add 11.0.0.1 255.0.0.0
+************* clock rate 4000000
+no shut
+exit
+
+#copy running-config startup-config     ------- Guardar Configuracion
+
+Cambiar el nombre del host:  (config)#hostname
+
+Borrar la configuración del router:  #erase nvram:
+
+Visualizar la configuración del router: #show running-config
+
+Gateway = IP De la interfaz al switch
+
+ID Red= 10.0.0.0
+
+Sig_Segmento = Interfaz del otro router.
+
+
+
+
+
+Configuración rutas estáticas:
+ip route [id red] [mascara] [sig salto/interfaz]
+
+Configuración RIP:
+router rip
+version 2
+network [id red]
+redistribute ospf [pid] metric 1
+no auto-summary
+exit
+
+Configuración OSPF:
+router ospf [pid]
+network [id red] [mascara comodín] area [#]
+area 3 virtual-link [router id]
+redistribute rip subnets
+log-adjacency-changes
+exit
